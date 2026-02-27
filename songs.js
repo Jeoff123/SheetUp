@@ -28,26 +28,82 @@ const SONGS_DATA = [
     },
     {
         id: 4,
-        title: "Here I Am to Worship",
+        title: "Ravile Ezhunettu Nee",
         subtitle: "4",
-        category: "lyrics",
-        pdfPath: "pdfs/lyrics/here-i-am-to-worship.pdf",
+        category: "hymns",
+        pdfPath: "pdfs/hymns/h4.pdf",
         isFavorite: false
     },
     {
         id: 5,
-        title: "Holy Holy Holy",
+        title: "Athmave Nee Unarane",
         subtitle: "5",
         category: "hymns",
-        pdfPath: "pdfs/hymns/holy-holy-holy.pdf",
+        pdfPath: "pdfs/hymns/h5.pdf",
         isFavorite: false
     },
     {
         id: 6,
-        title: "10,000 Reasons",
+        title: "En Athmave Unaruka",
         subtitle: "6",
-        category: "lyrics",
-        pdfPath: "pdfs/lyrics/10000-reasons.pdf",
+        category: "hymns",
+        pdfPath: "pdfs/hymns/h6.pdf",
+        isFavorite: false
+    },
+    {
+        id: 7,
+        title: "Vannam Bhoomiyin",
+        subtitle: "7",
+        category: "hymns",
+        pdfPath: "pdfs/hymns/h7.pdf",
+        isFavorite: false
+    },
+    {
+        id: 8,
+        title: "Swarsimhasana Mun Nilkum",
+        subtitle: "8",
+        category: "hymns",
+        pdfPath: "pdfs/hymns/h8.pdf",
+        isFavorite: false
+    },
+    {
+        id: 9,
+        title: "Kshemmam Ra Nidrashesam",
+        subtitle: "9",
+        category: "hymns",
+        pdfPath: "pdfs/hymns/h9.pdf",
+        isFavorite: false
+    }
+    ,{
+        id: 10,
+        title: "Mahathwamulla Daivame",
+        subtitle: "10",
+        category: "hymns",
+        pdfPath: "pdfs/hymns/h10.pdf",
+        isFavorite: false
+    }
+    ,{
+        id: 11,
+        title: "En Athmavin Adithyane",
+        subtitle: "11",
+        category: "hymns",
+        pdfPath: "pdfs/hymns/h11.pdf",
+        isFavorite: false
+    }
+    ,{
+        id: 12,
+        title: "Ee Pakalil Yenne",
+        subtitle: "12",
+        category: "hymns",
+        pdfPath: "pdfs/hymns/h12.pdf",
+        isFavorite: false
+    }
+    ,{
+        id: 13,
+        title: "Koode Parka ",
+        subtitle: "13",
+        category: "hymns",
+        pdfPath: "pdfs/hymns/h13.pdf",
         isFavorite: false
     }
 ];
