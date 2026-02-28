@@ -2,6 +2,9 @@
 
 A static web-based sheet music library designed for CSI (Church of South India) choir members and worship musicians.
 
+## Live Demo
+🌐 **Try it now**: https://jeoff123.github.io/SheetUp/
+
 ## Features
 
 - 📚 **Organized Categories**: Hymns and Lyrics with easy navigation
