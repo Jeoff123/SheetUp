@@ -8,10 +8,9 @@ A static web-based sheet music library designed for church choir members and wor
 - 🔍 **Real-time Search**: Find songs instantly by title or category
 - ⭐ **Favorites System**: Mark and access favorite songs quickly
 - 📄 **PDF Viewer**: Multi-page PDF viewing with zoom and navigation
-- 🌙 **Multiple Themes**: Light, dark, and stage modes
+- 🌙 **Multiple Themes**: Light and dark modes
 - 📱 **Responsive Design**: Works on desktop and mobile devices
 - ⚡ **Offline Ready**: Works offline after initial load
-- 🎹 **Stage Mode**: Full-screen minimal UI for live worship
 
 ## Quick Start
 
@@ -83,7 +82,6 @@ To add new songs to your library:
 ### Themes
 - **Light Mode**: Default bright theme
 - **Dark Mode**: Easy on the eyes for extended use
-- **Stage Mode**: Black background, minimal UI for live performance
 
 ## Customization
 

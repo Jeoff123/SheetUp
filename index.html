@@ -16,26 +16,18 @@
             <div class="header-content">
                 <div class="logo">
                     <h1>Sheet Up</h1>
-                    <span class="tagline">Digital Sheet Music Library</span>
+                    <span class="tagline">Sheet Music For CSI Liturgy & Songs</span>
                 </div>
                 <div class="header-actions">
-                    <button id="searchToggle" class="icon-btn" title="Toggle Search">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <path d="m21 21-4.35-4.35"></path>
-                        </svg>
-                    </button>
-                    <button id="favoritesToggle" class="icon-btn" title="Favorites">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                        </svg>
-                        <span id="favoritesCount" class="favorites-count hidden">0</span>
-                    </button>
-                    <button id="stageModeToggle" class="icon-btn" title="Stage Mode">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
-                        </svg>
-                    </button>
+                    <div class="search-box-container">
+                        <input type="text" id="headerSearchInput" class="header-search-input" placeholder="Search..." autocomplete="off">
+                        <button id="headerSearchBtn" class="header-search-btn" title="Search">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                        </button>
+                    </div>
                     <button id="themeToggle" class="icon-btn" title="Toggle Theme">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="12" cy="12" r="5"></circle>

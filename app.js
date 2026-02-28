@@ -35,12 +35,7 @@ class SheetUpApp {
         // Theme toggle
         document.getElementById('themeToggle').addEventListener('click', () => this.toggleTheme());
         
-        // Search functionality
-        document.getElementById('searchToggle').addEventListener('click', () => this.toggleSearch());
-        document.getElementById('searchInput').addEventListener('input', (e) => this.handleSearch(e.target.value));
-        document.getElementById('clearSearch').addEventListener('click', () => this.clearSearch());
-        
-        // Category navigation
+        // Header search functionality
         document.querySelectorAll('.category-item').forEach(item => {
             item.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -58,8 +53,19 @@ class SheetUpApp {
         document.getElementById('prevPage').addEventListener('click', () => this.previousPage());
         document.getElementById('nextPage').addEventListener('click', () => this.nextPage());
         
-        // Stage mode
-        document.getElementById('stageModeToggle').addEventListener('click', () => this.toggleStageMode());
+        // Header search functionality
+        const headerSearchInput = document.getElementById('headerSearchInput');
+        
+        headerSearchInput.addEventListener('input', (e) => {
+            this.performSearch(e.target.value);
+        });
+        
+        headerSearchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                headerSearchInput.value = '';
+                this.performSearch('');
+            }
+        });
         
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => this.handleKeyboard(e));
@@ -88,46 +94,25 @@ class SheetUpApp {
     }
 
     toggleTheme() {
-        const themes = ['light', 'dark', 'stage'];
+        const themes = ['light', 'dark'];
         const currentIndex = themes.indexOf(this.currentTheme);
         this.currentTheme = themes[(currentIndex + 1) % themes.length];
         
         this.applyTheme();
         this.saveTheme(this.currentTheme);
-        
-        if (this.currentTheme === 'stage') {
-            this.isStageMode = true;
-            document.getElementById('stageModeToggle').classList.add('active');
-        } else {
-            this.isStageMode = false;
-            document.getElementById('stageModeToggle').classList.remove('active');
-        }
     }
 
     updateThemeIcon() {
         const icon = document.querySelector('#themeToggle svg');
         const themeIcons = {
             light: '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>',
-            dark: '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>',
-            stage: '<polygon points="5 3 19 12 5 21 5 3"></polygon>'
+            dark: '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>'
         };
         icon.innerHTML = themeIcons[this.currentTheme];
     }
 
     // Search Functionality
-    toggleSearch() {
-        const searchBar = document.getElementById('searchBar');
-        const searchInput = document.getElementById('searchInput');
-        
-        searchBar.classList.toggle('hidden');
-        document.getElementById('searchToggle').classList.toggle('active');
-        
-        if (!searchBar.classList.contains('hidden')) {
-            searchInput.focus();
-        }
-    }
-
-    handleSearch(query) {
+    performSearch(query) {
         this.currentSearch = query.toLowerCase();
         this.updateSongList();
     }
@@ -256,46 +241,37 @@ class SheetUpApp {
         }
     }
 
-    // Stage Mode
-    toggleStageMode() {
-        this.isStageMode = !this.isStageMode;
-        document.getElementById('stageModeToggle').classList.toggle('active');
+    toggleFavorite(songId) {
+        const song = this.songs.find(s => s.id === songId);
+        if (!song) return;
         
-        if (this.isStageMode) {
-            this.currentTheme = 'stage';
-            this.applyTheme();
-            this.saveTheme(this.currentTheme);
+        song.isFavorite = !song.isFavorite;
+        
+        if (song.isFavorite) {
+            this.favorites.push(songId);
         } else {
-            this.currentTheme = 'dark';
-            this.applyTheme();
-            this.saveTheme(this.currentTheme);
+            const index = this.favorites.indexOf(songId);
+            if (index > -1) {
+                this.favorites.splice(index, 1);
+            }
+        }
+        
+        this.saveFavorites();
+        this.updateSongList();
+        this.updateCategoryCounts();
+    }
+
+    toggleCurrentFavorite() {
+        if (this.currentPdf) {
+            this.toggleFavorite(this.currentPdf.id);
+            this.updateFavoriteButton();
         }
     }
 
     // PDF Viewer
     async openPdfModal(song) {
-        this.showLoading();
-        this.currentPdf = song;
-        
-        const modal = document.getElementById('pdfModal');
-        const title = document.getElementById('pdfTitle');
-        const subtitle = document.getElementById('pdfSubtitle');
-        
-        title.textContent = song.title;
-        subtitle.textContent = song.subtitle;
-        
-        this.updateFavoriteButton();
-        
-        modal.classList.remove('hidden');
-        
-        try {
-            await this.loadPdf(song.pdfPath);
-        } catch (error) {
-            console.error('Error loading PDF:', error);
-            this.showError('Failed to load PDF. Please check if the file exists.');
-        } finally {
-            this.hideLoading();
-        }
+        // Open PDF in new tab instead of modal
+        window.open(song.pdfPath, '_blank');
     }
 
     closePdfModal() {
@@ -532,8 +508,6 @@ class SheetUpApp {
         if (e.key === 'Escape') {
             if (!document.getElementById('pdfModal').classList.contains('hidden')) {
                 this.closePdfModal();
-            } else if (!document.getElementById('searchBar').classList.contains('hidden')) {
-                this.toggleSearch();
             }
         }
         
@@ -615,7 +589,7 @@ class SheetUpApp {
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                             <polyline points="14 2 14 8 20 8"></polyline>
                         </svg>
-                        Open Sheet Music
+                        Open
                     </button>
                     <button class="btn btn-icon btn-secondary" onclick="app.toggleFavorite(${song.id})" title="${song.isFavorite ? 'Remove from favorites' : 'Add to favorites'}">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="${song.isFavorite ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
