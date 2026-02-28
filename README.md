@@ -1,6 +1,6 @@
 # Sheet Up - Digital Sheet Music Library
 
-A static web-based sheet music library designed for church choir members and worship musicians.
+A static web-based sheet music library designed for CSI (Church of South India) choir members and worship musicians.
 
 ## Features
 
