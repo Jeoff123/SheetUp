@@ -16,11 +16,11 @@
             <div class="header-content">
                 <div class="logo">
                     <h1>Sheet Up</h1>
-                    <span class="tagline">Sheet Music For CSI Liturgy & Songs</span>
+                    <span class="tagline">Easy Church Songs</span>
                 </div>
                 <div class="header-actions">
                     <div class="search-box-container">
-                        <input type="text" id="headerSearchInput" class="header-search-input" placeholder="Search..." autocomplete="off">
+                        <input type="text" id="headerSearchInput" class="header-search-input" placeholder="Search songs..." autocomplete="off">
                         <button id="headerSearchBtn" class="header-search-btn" title="Search">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <circle cx="11" cy="11" r="8"></circle>
@@ -28,7 +28,7 @@
                             </svg>
                         </button>
                     </div>
-                    <button id="themeToggle" class="icon-btn" title="Toggle Theme">
+                    <button id="themeToggle" class="icon-btn" title="Change Theme">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="12" cy="12" r="5"></circle>
                             <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -52,7 +52,7 @@
                     <circle cx="11" cy="11" r="8"></circle>
                     <path d="m21 21-4.35-4.35"></path>
                 </svg>
-                <input type="text" id="searchInput" placeholder="Search songs by title, number (e.g., 1 or #1), or category..." autocomplete="off">
+                <input type="text" id="searchInput" placeholder="Search by song name or number..." autocomplete="off">
                 <button id="clearSearch" class="clear-btn" title="Clear search">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -64,43 +64,6 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <!-- Sidebar Navigation -->
-            <nav class="sidebar">
-                <div class="nav-section">
-                    <h3>Categories</h3>
-                    <ul id="categoryList" class="category-list">
-                        <li class="category-item active" data-category="all">
-                            <a href="#" class="category-link">
-                                <span class="category-icon">📚</span>
-                                <span class="category-name">All Songs</span>
-                                <span class="category-count" id="allCount">0</span>
-                            </a>
-                        </li>
-                        <li class="category-item" data-category="hymns">
-                            <a href="#" class="category-link">
-                                <span class="category-icon">🎼</span>
-                                <span class="category-name">Hymns</span>
-                                <span class="category-count" id="hymnsCount">0</span>
-                            </a>
-                        </li>
-                        <li class="category-item" data-category="lyrics">
-                            <a href="#" class="category-link">
-                                <span class="category-icon">🎤</span>
-                                <span class="category-name">Lyrics</span>
-                                <span class="category-count" id="lyricsCount">0</span>
-                            </a>
-                        </li>
-                        <li class="category-item" data-category="favorites">
-                            <a href="#" class="category-link">
-                                <span class="category-icon">⭐</span>
-                                <span class="category-name">Favorites</span>
-                                <span class="category-count" id="favoritesCount">0</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
             <!-- Song List -->
             <div class="content-area">
                 <div class="content-header">
@@ -148,11 +111,6 @@
                                 <line x1="10" y1="14" x2="21" y2="3"></line>
                             </svg>
                         </button>
-                        <button id="favoriteToggle" class="icon-btn" title="Add to Favorites">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                            </svg>
-                        </button>
                         <button id="closePdf" class="icon-btn" title="Close">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -184,7 +142,7 @@
                                 <line x1="18" y1="6" x2="6" y2="18"></line>
                                 <line x1="6" y1="6" x2="18" y2="18"></line>
                             </svg>
-                            Close PDF
+                            ❌ Close Song
                         </button>
                     </div>
                 </div>

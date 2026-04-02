@@ -1,9 +1,7 @@
 class SheetUpApp {
     constructor() {
         this.songs = [];
-        this.currentCategory = 'all';
         this.currentSearch = '';
-        this.favorites = this.loadFavorites();
         this.currentPdf = null;
         this.currentPage = 1;
         this.totalPages = 1;
@@ -24,24 +22,11 @@ class SheetUpApp {
     // Load songs from external data file
     loadSongs() {
         this.songs = getSongsData();
-
-        // Apply favorite status
-        this.songs.forEach(song => {
-            song.isFavorite = this.favorites.includes(song.id);
-        });
     }
 
     setupEventListeners() {
         // Theme toggle
         document.getElementById('themeToggle').addEventListener('click', () => this.toggleTheme());
-        
-        // Header search functionality
-        document.querySelectorAll('.category-item').forEach(item => {
-            item.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.selectCategory(item.dataset.category);
-            });
-        });
         
         // PDF modal controls
         document.getElementById('closePdf').addEventListener('click', () => this.closePdfModal());
@@ -49,23 +34,69 @@ class SheetUpApp {
         document.getElementById('zoomOut').addEventListener('click', () => this.zoomOut());
         document.getElementById('fullscreenToggle').addEventListener('click', () => this.toggleFullscreen());
         document.getElementById('openFullscreen').addEventListener('click', () => this.openInNewTab());
-        document.getElementById('favoriteToggle').addEventListener('click', () => this.toggleCurrentFavorite());
         document.getElementById('prevPage').addEventListener('click', () => this.previousPage());
         document.getElementById('nextPage').addEventListener('click', () => this.nextPage());
         
         // Header search functionality
         const headerSearchInput = document.getElementById('headerSearchInput');
+        const headerSearchBtn = document.getElementById('headerSearchBtn');
         
-        headerSearchInput.addEventListener('input', (e) => {
-            this.performSearch(e.target.value);
-        });
+        if (headerSearchInput) {
+            headerSearchInput.addEventListener('input', (e) => {
+                this.performSearch(e.target.value);
+            });
+        }
         
-        headerSearchInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                headerSearchInput.value = '';
-                this.performSearch('');
-            }
-        });
+        if (headerSearchBtn) {
+            headerSearchBtn.addEventListener('click', () => {
+                this.performSearch(headerSearchInput.value);
+                // Dismiss keyboard on mobile
+                headerSearchInput.blur();
+            });
+        }
+        
+        if (headerSearchInput) {
+            headerSearchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    this.performSearch(headerSearchInput.value);
+                    // Dismiss keyboard on mobile
+                    headerSearchInput.blur();
+                }
+                if (e.key === 'Escape') {
+                    headerSearchInput.value = '';
+                    this.performSearch('');
+                    headerSearchInput.blur();
+                }
+            });
+        }
+        
+        // Setup main search bar listeners
+        const searchInput = document.getElementById('searchInput');
+        const clearSearchBtn = document.getElementById('clearSearch');
+        
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                this.performSearch(e.target.value);
+            });
+            
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    this.performSearch(searchInput.value);
+                    searchInput.blur();
+                }
+                if (e.key === 'Escape') {
+                    this.clearSearch();
+                }
+            });
+        }
+        
+        if (clearSearchBtn) {
+            clearSearchBtn.addEventListener('click', () => {
+                this.clearSearch();
+            });
+        }
         
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => this.handleKeyboard(e));
@@ -111,28 +142,31 @@ class SheetUpApp {
         icon.innerHTML = themeIcons[this.currentTheme];
     }
 
-    // Search Functionality
+    // Helper method for layman users
+    clearSearchAndShowAll() {
+        document.getElementById('headerSearchInput').value = '';
+        this.currentSearch = '';
+        this.selectCategory('all');
+    }
+
+    // Enhanced search with better feedback
     performSearch(query) {
         this.currentSearch = query.toLowerCase();
         this.updateSongList();
     }
 
     clearSearch() {
-        document.getElementById('searchInput').value = '';
+        const searchInput = document.getElementById('searchInput');
+        searchInput.value = '';
         this.currentSearch = '';
         this.updateSongList();
+        // Dismiss keyboard on mobile
+        searchInput.blur();
     }
 
-    // Enhanced search with song number priority
+    // Simplified search - just filter all songs
     getFilteredSongs() {
         let filtered = this.songs;
-        
-        // Filter by category
-        if (this.currentCategory === 'favorites') {
-            filtered = filtered.filter(song => song.isFavorite);
-        } else if (this.currentCategory !== 'all') {
-            filtered = filtered.filter(song => song.category === this.currentCategory);
-        }
         
         // Filter by search with enhanced logic
         if (this.currentSearch) {
@@ -157,120 +191,16 @@ class SheetUpApp {
         return filtered;
     }
 
-    // Category Management
-    selectCategory(category) {
-        this.currentCategory = category;
-        
-        // Update active state
-        document.querySelectorAll('.category-item').forEach(item => {
-            item.classList.remove('active');
-        });
-        document.querySelector(`[data-category="${category}"]`).classList.add('active');
-        
-        // Update title
-        const titles = {
-            all: 'All Songs',
-            hymns: 'Hymns',
-            lyrics: 'Lyrics',
-            favorites: 'Favorites'
-        };
-        document.getElementById('currentCategoryTitle').textContent = titles[category];
-        
+    // Helper method for layman users
+    clearSearchAndShowAll() {
+        document.getElementById('headerSearchInput').value = '';
+        this.currentSearch = '';
         this.updateSongList();
-    }
-
-    // Favorites Management
-    loadFavorites() {
-        const saved = localStorage.getItem('sheetup-favorites');
-        return saved ? JSON.parse(saved) : [];
-    }
-
-    saveFavorites() {
-        localStorage.setItem('sheetup-favorites', JSON.stringify(this.favorites));
-        this.updateFavoritesCount();
-    }
-
-    toggleFavorite(songId) {
-        const song = this.songs.find(s => s.id === songId);
-        if (!song) return;
-        
-        song.isFavorite = !song.isFavorite;
-        
-        if (song.isFavorite) {
-            this.favorites.push(songId);
-        } else {
-            const index = this.favorites.indexOf(songId);
-            if (index > -1) {
-                this.favorites.splice(index, 1);
-            }
-        }
-        
-        this.saveFavorites();
-        this.updateSongList();
-        this.updateCategoryCounts();
-    }
-
-    toggleCurrentFavorite() {
-        if (this.currentPdf) {
-            this.toggleFavorite(this.currentPdf.id);
-            this.updateFavoriteButton();
-        }
-    }
-
-    updateFavoritesCount() {
-        const count = this.favorites.length;
-        const countElements = document.querySelectorAll('#favoritesCount');
-        countElements.forEach(el => {
-            el.textContent = count;
-            if (count > 0) {
-                el.classList.remove('hidden');
-            } else {
-                el.classList.add('hidden');
-            }
-        });
-    }
-
-    updateFavoriteButton() {
-        const btn = document.getElementById('favoriteToggle');
-        if (this.currentPdf && this.currentPdf.isFavorite) {
-            btn.classList.add('active');
-            btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>';
-        } else {
-            btn.classList.remove('active');
-            btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>';
-        }
-    }
-
-    toggleFavorite(songId) {
-        const song = this.songs.find(s => s.id === songId);
-        if (!song) return;
-        
-        song.isFavorite = !song.isFavorite;
-        
-        if (song.isFavorite) {
-            this.favorites.push(songId);
-        } else {
-            const index = this.favorites.indexOf(songId);
-            if (index > -1) {
-                this.favorites.splice(index, 1);
-            }
-        }
-        
-        this.saveFavorites();
-        this.updateSongList();
-        this.updateCategoryCounts();
-    }
-
-    toggleCurrentFavorite() {
-        if (this.currentPdf) {
-            this.toggleFavorite(this.currentPdf.id);
-            this.updateFavoriteButton();
-        }
     }
 
     // PDF Viewer
     async openPdfModal(song) {
-        // Open PDF in new tab instead of modal
+        // Open PDF in new tab
         window.open(song.pdfPath, '_blank');
     }
 
@@ -542,95 +472,93 @@ class SheetUpApp {
         }
         
         if (e.key === '/' && !e.target.matches('input')) {
-            e.preventDefault();
-            this.toggleSearch();
+    }
+    
+    if (!document.getElementById('pdfModal').classList.contains('hidden')) {
+        switch(e.key) {
+            case 'ArrowLeft':
+                this.previousPage();
+                break;
+            case 'ArrowRight':
+                this.nextPage();
+                break;
+            case '+':
+            case '=':
+                if (e.ctrlKey || e.metaKey) {
+                    e.preventDefault();
+                    this.zoomIn();
+                }
+                break;
+            case '-':
+                if (e.ctrlKey || e.metaKey) {
+                    e.preventDefault();
+                    this.zoomOut();
+                }
+                break;
+            case 'f':
+                if (!e.ctrlKey && !e.metaKey) {
+                    e.preventDefault();
+                    this.openInNewTab();
+                }
+                break;
         }
     }
-
-    // UI Rendering
-    updateUI() {
-        this.updateSongList();
-        this.updateCategoryCounts();
-        this.updateFavoritesCount();
+    
+    if (e.key === '/' && !e.target.matches('input')) {
+        e.preventDefault();
+        this.toggleSearch();
     }
+}
 
-    updateSongList() {
-        const songList = document.getElementById('songList');
-        const filteredSongs = this.getFilteredSongs();
-        
-        document.getElementById('songCount').textContent = `${filteredSongs.length} song${filteredSongs.length !== 1 ? 's' : ''}`;
-        
-        if (filteredSongs.length === 0) {
-            songList.innerHTML = `
-                <div class="text-center" style="padding: 3rem; color: var(--text-secondary);">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom: 1rem;">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <path d="m21 21-4.35-4.35"></path>
-                    </svg>
-                    <h3>No songs found</h3>
-                    <p>Try adjusting your search or category filter</p>
-                </div>
-            `;
-            return;
-        }
-        
-        songList.innerHTML = filteredSongs.map(song => `
-            <div class="song-item" data-song-id="${song.id}">
-                <div class="song-header">
-                    <div>
-                        <div class="song-title">${song.title}</div>
-                        <div class="song-subtitle">${song.subtitle}</div>
-                    </div>
-                    <span class="song-category">${song.category}</span>
-                </div>
-                <div class="song-actions">
-                    <button class="btn" onclick="app.openPdfModal(${JSON.stringify(song).replace(/"/g, '&quot;')})">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                            <polyline points="14 2 14 8 20 8"></polyline>
-                        </svg>
-                        Open
-                    </button>
-                    <button class="btn btn-icon btn-secondary" onclick="app.toggleFavorite(${song.id})" title="${song.isFavorite ? 'Remove from favorites' : 'Add to favorites'}">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="${song.isFavorite ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                        </svg>
-                    </button>
-                </div>
+// UI Updates
+updateUI() {
+    this.updateSongList();
+}
+
+updateSongList() {
+    const songList = document.getElementById('songList');
+    const filteredSongs = this.getFilteredSongs();
+    
+    document.getElementById('songCount').textContent = `${filteredSongs.length} song${filteredSongs.length !== 1 ? 's' : ''}`;
+    document.getElementById('currentCategoryTitle').textContent = 'All Songs';
+    
+    if (filteredSongs.length === 0) {
+        songList.innerHTML = `
+            <div class="text-center" style="padding: 3rem; color: var(--text-secondary);">
+                <div style="font-size: 2rem; margin-bottom: 1rem; color: var(--text-secondary);">No Results</div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">No Songs Found</h3>
+                <p style="font-size: 1rem;">Try searching with different words</p>
+                <button onclick="app.clearSearchAndShowAll()" style="margin-top: 1rem; padding: 0.75rem 1.5rem; background: var(--primary-color); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                    Show All Songs
+                </button>
             </div>
-        `).join('');
+        `;
+        return;
     }
+    
+    songList.innerHTML = filteredSongs.map(song => `
+        <div class="song-item" data-song-id="${song.id}">
+            <div class="song-header">
+                <div>
+                    <div class="song-title">${song.title}</div>
+                    <div class="song-subtitle">${song.subtitle}</div>
+                </div>
+                <span class="song-category">${song.category}</span>
+            </div>
+            <div class="song-actions">
+                <button class="btn" onclick="app.openPdfModal(${JSON.stringify(song).replace(/"/g, '&quot;')})">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    Open Song
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
 
-    updateCategoryCounts() {
-        const counts = {
-            all: this.songs.length,
-            hymns: this.songs.filter(s => s.category === 'hymns').length,
-            lyrics: this.songs.filter(s => s.category === 'lyrics').length,
-            favorites: this.favorites.length
-        };
-        
-        Object.keys(counts).forEach(category => {
-            const element = document.getElementById(`${category}Count`);
-            if (element) {
-                element.textContent = counts[category];
-            }
-        });
-    }
-
-    // Loading States
-    showLoading() {
-        document.getElementById('loadingOverlay').classList.remove('hidden');
-    }
-
-    hideLoading() {
-        document.getElementById('loadingOverlay').classList.add('hidden');
-    }
-
-    showError(message) {
-        alert(message); // In a real app, use a proper toast notification
-    }
-
-    // Test PDF loading directly
+// Test PDF loading directly
     async testPdfDirectly() {
         if (!this.currentPdf) return;
         
@@ -692,7 +620,7 @@ class SheetUpApp {
     }
 }
 
-// Initialize the app when DOM is ready
+// Initialize app when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     window.app = new SheetUpApp();
 });

@@ -7,7 +7,7 @@ const SONGS_DATA = [
         title: "Adithyan Prabathakale",
         subtitle: "1",
         category: "hymns",
-        pdfPath: "pdfs/hymns/h1.pdf",
+        pdfPath: "pdfs/hymns/h1.pdf#page=1",
         isFavorite: false
     },
     {
@@ -424,6 +424,510 @@ const SONGS_DATA = [
         subtitle: "53",
         category: "hymns",
         pdfPath: "pdfs/hymns/h53.pdf",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 54,
+        title: "Rajan Davidooril pandu",
+        subtitle: "54",
+        category: "hymns",
+        pdfPath: "Hymns_54_69.pdf#page=1",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 55,
+        title: "Goshale Jathanayone",
+        subtitle: "55",
+        category: "hymns",
+        pdfPath: "Hymns_54_69.pdf#page=2",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 56,
+        title: "Padin Embageetham",
+        subtitle: "56",
+        category: "hymns",
+        pdfPath: "Hymns_54_69.pdf#page=3",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 57,
+        title: "Christhavare Vandhanekunarin",
+        subtitle: "57",
+        category: "hymns",
+        pdfPath: "Hymns_54_69.pdf#page=6",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 58,
+        title: "Adyandamillatha Nadhan",
+        subtitle: "58",
+        category: "hymns",
+        pdfPath: "Hymns_54_69.pdf#page=7",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 59,
+        title: "Doorekanum Vellideepam",
+        subtitle: "59",
+        category: "hymns",
+        pdfPath: "Hymns_54_69.pdf#page=9",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 60,
+        title: "Aatidayer Rathrikale",
+        subtitle: "60",
+        category: "hymns",
+        pdfPath: "Hymns_54_69.pdf#page=10",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 61,
+        title: "Innum Theerum Varshathil",
+        subtitle: "61",
+        category: "hymns",
+        pdfPath: "Hymns_54_69.pdf#page=11",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 62,
+        title: "Orandu Koode Kazhinju",
+        subtitle: "62",
+        category: "hymns",
+        pdfPath: "Hymns_54_69.pdf#page=12",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 63,
+        title: "Anadyanam Daivame",
+        subtitle: "63",
+        category: "hymns",
+        pdfPath: "Hymns_54_69.pdf#page=13",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 64,
+        title: "Puthuvalsharathin",
+        subtitle: "64",
+        category: "hymns",
+        pdfPath: "Hymns_54_69.pdf#page=16",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 65,
+        title: "Daivame Ee Andine",
+        subtitle: "65",
+        category: "hymns",
+        pdfPath: "Hymns_54_69.pdf#page=17",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 66,
+        title: "Rakshithavin Rakthamadyam",
+        subtitle: "66",
+        category: "hymns",
+        pdfPath: "Hymns_54_69.pdf#page=18",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 67,
+        title: "Raksha Nalkum Namathinayi",
+        subtitle: "67",
+        category: "hymns",
+        pdfPath: "Hymns_54_69.pdf#page=19",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 68,
+        title: "Yeshu Thante Ganagalku",
+        subtitle: "68",
+        category: "hymns",
+        pdfPath: "Hymns_54_69.pdf#page=21",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 69,
+        title: "Unathathil Mahathyam",
+        subtitle: "69",
+        category: "hymns",
+        pdfPath: "Hymns_54_69.pdf#page=23",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 70,
+        title: "Param Andandathone",
+        subtitle: "70",
+        category: "hymns",
+        pdfPath: "Hymns_70_89.pdf#page=1",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 71,
+        title: "Utharahimadrikal",
+        subtitle: "71",
+        category: "hymns",
+        pdfPath: "Hymns_70_89.pdf#page=2",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 72,
+        title: "Boovil Engum",
+        subtitle: "72",
+        category: "hymns",
+        pdfPath: "Hymns_70_89.pdf#page=5",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 73,
+        title: "Nashapapikale Rakshipan",
+        subtitle: "73",
+        category: "hymns",
+        pdfPath: "Hymns_70_89.pdf#page=6",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 74,
+        title: "Nalkuka Daivame",
+        subtitle: "74",
+        category: "hymns",
+        pdfPath: "Hymns_70_89.pdf#page=9",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 75,
+        title: "Adithyan Udicheedunnu",
+        subtitle: "75",
+        category: "hymns",
+        pdfPath: "Hymns_70_89.pdf#page=12",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 76,
+        title: "Enn Nimitham Pokuka",
+        subtitle: "76",
+        category: "hymns",
+        pdfPath: "Hymns_70_89.pdf#page=15",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 77,
+        title: "Lokare Rakshipathinu",
+        subtitle: "77",
+        category: "hymns",
+        pdfPath: "Hymns_70_89.pdf#page=16",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 78,
+        title: "Nin Swanthanamathinu",
+        subtitle: "78",
+        category: "hymns",
+        pdfPath: "Hymns_70_89.pdf#page=18",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 79,
+        title: "Agnjanam Lokathe",
+        subtitle: "79",
+        category: "hymns",
+        pdfPath: "Hymns_70_89.pdf#page=20",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 80,
+        title: "Seeyon Rajan Geyaliyaye",
+        subtitle: "80",
+        category: "hymns",
+        pdfPath: "Hymns_70_89.pdf#page=21",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 81,
+        title: "Karthave Enne Kopamayi",
+        subtitle: "81",
+        category: "hymns",
+        pdfPath: "Hymns_70_89.pdf#page=23",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 82,
+        title: "Annyanaya Enne Yeshu",
+        subtitle: "82",
+        category: "hymns",
+        pdfPath: "Hymns_70_89.pdf#page=25",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 83,
+        title: "Yenikayi Cheenthi Nin Raktham",
+        subtitle: "83",
+        category: "hymns",
+        pdfPath: "Hymns_70_89.pdf#page=27",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 84,
+        title: "Pilarnoru Paraye",
+        subtitle: "84",
+        category: "hymns",
+        pdfPath: "Hymns_70_89.pdf#page=30",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 85,
+        title: "Pisahcu Gadam Lokavum",
+        subtitle: "85",
+        category: "hymns",
+        pdfPath: "Hymns_70_89.pdf#page=33",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 86,
+        title: "Yeshu Enn Athmasache",
+        subtitle: "86",
+        category: "hymns",
+        pdfPath: "Hymns_70_89.pdf#page=35",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 87,
+        title: "Swargasthapithave",
+        subtitle: "87",
+        category: "hymns",
+        pdfPath: "Hymns_70_89.pdf#page=41",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 88,
+        title: "Veshudadaivakalpana",
+        subtitle: "88",
+        category: "hymns",
+        pdfPath: "Hymns_70_89.pdf#page=43",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 89,
+        title: "Nee Sheenicho Nee Valanjo",
+        subtitle: "89",
+        category: "hymns",
+        pdfPath: "Hymns_70_89.pdf#page=44",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 90,
+        title: "Daivame Mahapapiyam",
+        subtitle: "90",
+        category: "hymns",
+        pdfPath: "Hymns_90_109.pdf#page=1",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 91,
+        title: "Takarna Hridayathingal",
+        subtitle: "91",
+        category: "hymns",
+        pdfPath: "Hymns_90_109.pdf#page=3",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 92,
+        title: "Papapashathal Badhan",
+        subtitle: "92",
+        category: "hymns",
+        pdfPath: "Hymns_90_109.pdf#page=5",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 93,
+        title: "Njan Varunu Krooshingal",
+        subtitle: "93",
+        category: "hymns",
+        pdfPath: "Hymns_90_109.pdf#page=7",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 94,
+        title: "Kaderiyadu Njan",
+        subtitle: "94",
+        category: "hymns",
+        pdfPath: "Hymns_90_109.pdf#page=9",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 95,
+        title: "Yeshu Kartha Karayunnen",
+        subtitle: "95",
+        category: "hymns",
+        pdfPath: "Hymns_90_109.pdf#page=13",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 96,
+        title: "Enn Rakshaka Marakale",
+        subtitle: "96",
+        category: "hymns",
+        pdfPath: "Hymns_90_109.pdf#page=14",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 97,
+        title: "Deenayalo Daivame",
+        subtitle: "97",
+        category: "hymns",
+        pdfPath: "Hymns_90_109.pdf#page=15",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 98,
+        title: "Shamipan Nilathin Daham",
+        subtitle: "98",
+        category: "hymns",
+        pdfPath: "Hymns_90_109.pdf#page=16",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 99,
+        title: "Lokarakshakaranakum",
+        subtitle: "99",
+        category: "hymns",
+        pdfPath: "Hymns_90_109.pdf#page=18",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 100,
+        title: "Seeyonileku Yeshu",
+        subtitle: "100",
+        category: "hymns",
+        pdfPath: "Hymns_90_109.pdf#page=19",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 101,
+        title: "Papikeka Ashayam",
+        subtitle: "101",
+        category: "hymns",
+        pdfPath: "Hymns_90_109.pdf#page=23",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 102,
+        title: "Manam Mahathvam Sthothram",
+        subtitle: "102",
+        category: "hymns",
+        pdfPath: "Hymns_90_109.pdf#page=24",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 103,
+        title: "Odikoodin Yeshuvodu",
+        subtitle: "103",
+        category: "hymns",
+        pdfPath: "Hymns_90_109.pdf#page=25",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 104,
+        title: "Gathshamane Chennu",
+        subtitle: "104",
+        category: "hymns",
+        pdfPath: "Hymns_90_109.pdf#page=27",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 105,
+        title: "Seeyonin Kumari Nee",
+        subtitle: "105",
+        category: "hymns",
+        pdfPath: "Hymns_90_109.pdf#page=30",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 106,
+        title: "Namude Karthavam Yeshu",
+        subtitle: "106",
+        category: "hymns",
+        pdfPath: "Hymns_90_109.pdf#page=32",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 107,
+        title: "Kalvarimel Maricheshu",
+        subtitle: "107",
+        category: "hymns",
+        pdfPath: "Hymns_90_109.pdf#page=33",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 108,
+        title: "Mahathwaprabhu Maricha",
+        subtitle: "108",
+        category: "hymns",
+        pdfPath: "Hymns_90_109.pdf#page=35",
+        isFavorite: false
+    }
+    ,
+    {
+        id: 109,
+        title: "Kalvarimudi Muzhangum",
+        subtitle: "109",
+        category: "hymns",
+        pdfPath: "Hymns_90_109.pdf#page=37",
         isFavorite: false
     }
 ];
